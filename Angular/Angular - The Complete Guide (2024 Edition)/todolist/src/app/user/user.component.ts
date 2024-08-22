@@ -1,11 +1,6 @@
 import { Component, computed, EventEmitter, Input, input, OnInit, Output, output, signal } from '@angular/core';
 import { DUMMY_USERS } from '../dummy-user';
-
-interface User {
-  id: string,
-  avatar: string,
-  name: string,
-}
+import { User } from './user.model';
 
 @Component({
   selector: 'app-user',
@@ -40,6 +35,7 @@ export class UserComponent implements OnInit {
   // @Input({ required: true }) name!: string;
   // @Input({ required: true }) id!: string;
   @Input({ required: true }) user!: User;
+  @Input({ required: true }) selected: boolean = false;
   @Output() select = new EventEmitter<string>();
 
 
