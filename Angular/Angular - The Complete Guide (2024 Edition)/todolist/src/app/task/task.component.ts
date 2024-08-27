@@ -1,22 +1,28 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { Task } from './task.model';
+import { CardComponent } from "../shared/card/card.component";
+import { DatePipe } from '@angular/common';
+import { TasksService } from '../tasks/tasks.service';
 
 @Component({
   selector: 'app-task',
   standalone: true,
   templateUrl: './task.component.html',
-  styleUrls: ['./task.component.scss']
+  styleUrls: ['./task.component.scss'],
+  imports: [CardComponent, DatePipe]
 })
 export class TaskComponent implements OnInit {
   @Input({ required: true }) task!: Task;
-  @Output() complete = new EventEmitter<string>();
+  private tasksService = inject(TasksService);
 
-  constructor() { }
+  constructor(
+
+  ) { }
 
   ngOnInit() {
   }
 
   onCompleteTask() {
-    this.complete.emit(this.task.id);
+    this.tasksService.completeTask(this.task.id);
   }
 }

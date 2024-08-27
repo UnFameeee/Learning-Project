@@ -1,12 +1,14 @@
 import { Component, computed, EventEmitter, Input, input, OnInit, Output, output, signal } from '@angular/core';
 import { DUMMY_USERS } from '../dummy-user';
 import { User } from './user.model';
+import { CardComponent } from "../shared/card/card.component";
 
 @Component({
   selector: 'app-user',
   standalone: true,
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  styleUrls: ['./user.component.scss'],
+  imports: [CardComponent]
 })
 export class UserComponent implements OnInit {
   //#region Signal Fundamental

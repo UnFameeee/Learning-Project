@@ -3,6 +3,8 @@ import { DUMMY_USERS } from '../dummy-user';
 import { TaskComponent } from "../task/task.component";
 import { dummyTasks } from '../../assets/tasks/dummy-task';
 import { NewTaskComponent } from "../new-task/new-task.component";
+import { NewTaskData } from '../new-task/new-task.model';
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -15,26 +17,23 @@ export class TasksComponent implements OnInit {
   @Input({ required: true }) id!: string;
   @Input({ required: true }) name!: string;
   isAddingTask: boolean = false;
-  tasks = dummyTasks;
 
   get selectedUserTasks() {
-    return this.tasks.filter(x => x.userId == this.id);
+    return this.tasksService.getUserTasks(this.id);
   }
 
-  constructor() { }
+  constructor(
+    private tasksService: TasksService,
+  ) { }
 
   ngOnInit() {
   }
-
-  onCompleteTask(taskId: string){
-    this.tasks = this.tasks.filter(x => x.id != taskId);
-  }
-
+  
   addTask() {
     this.isAddingTask = true;
   }
-
-  cancelAddTask() {
+  
+  onCloseAddTask() {
     this.isAddingTask = false;
   }
 }
