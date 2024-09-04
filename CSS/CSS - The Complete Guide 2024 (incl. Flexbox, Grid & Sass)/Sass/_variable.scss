@@ -1,0 +1,4 @@
+// map-get($map: $colors, $key: main): #521751;
+$colors: (main: #521751, secondary: #fa923f); 
+$border-default: 0.05rem solid map-get($map: $colors, $key: main);
+$size-default: 1rem;
